@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<style>
+  body {
+    background-image: url("/login-bac.jpg");
+    object-fit: contain;
+  }
+
+  /* Centering the container and setting its width and height */
+  .container {
+    width: 30%;
+    height: 50vh;
+    /* 50% of the viewport height */
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: transparent;
+  }
+
+  /* Style for the headings */
+  .container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Style for the form and form elements */
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border-radius: 25px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #a4a5ff;
+    color: white;
+    font-size: 16px;
+
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #a4a5ff;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="signup-form" onsubmit="return handleSubmit(event)">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Here, you can add any further validation or API call
+      if (email && password) {
+        alert("Login successful!");
+        window.location.href = "Home.html"; // Redirect to Home.html
+      }
+    }
+  </script>
+</body>
+
+</html>

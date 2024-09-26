@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .navbar {
+      background-color: #fdbb4d;
+      color: white;
+      padding: 5px 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 20px;
+    }
+
+    .nav-btn:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      margin: 10px;
+      display: flex;
+      flex: 1;
+      width: auto;
+      /* height: auto; */
+      background-color: #ffa7a2;
+      /* overflow-inline:hidden; */
+    }
+
+    .left-panel {
+      /* margin-right: 20px; */
+      background-color: #fcda78;
+      padding: 20px;
+      width: 25%;
+      border-right: 1px solid #ccc;
+    }
+    .product-btn {
+      display: block;
+      background-color: #fd9290;
+      color: white;
+      border: none;
+      padding: 13px;
+      margin: 25px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .product-btn:hover {
+      transform: scale(1.03);
+      background-color: #ff8482;
+    }
+    .product-btn2 {
+      display: block;
+      background-color: #fcda78;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .product-btn2:hover {
+      transform: scale(1.03);
+      background-color: #fdbb4d;
+    }
+    .product-btn3 {
+      display: block;
+      background-color: transparent;
+      color: black;
+      border: 2px solid #fcda78;
+      padding: 10px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100px;
+      font-size: 16px;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .product-btn3:hover {
+      transform: scale(1.03);
+      background-color: #fdbb4d;
+      color: white;
+    }
+
+    .right-panel {
+      padding: 20px;
+      width: 75%;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: calc(33.33% - 10px); /* Three cards per row */
+    }
+
+    .cart-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    #cart {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        width: calc(50% - 10px); /* Two cards per row */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 100%; /* One card per row */
+      }
+    }
+  </style>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="ars.logo.jpg" alt="" style="height: 70px; width: 70px" />
+        </div>
+        <h1 style="padding-left: 200px">Products</h1>
+        <div class="nav-buttons">
+          <a href="Home.html" style="text-decoration: none; color: white"
+            >Home</a
+          >
+          <button class="nav-btn" onclick="showPage('Product Gallery')">
+            Product Gallery
+          </button>
+          <button class="nav-btn" onclick="showPage('cart')">See Cart</button>
+        </div>
+      </div>
+    </nav>
+    <div class="container" id="Product Gallery">
+      <div class="left-panel">
+        <h2>Choose Products</h2>
+        <button class="product-btn" onclick="showProduct('Fashion & Clothes')">
+          Fashion & Clothes
+        </button>
+        <button class="product-btn" onclick="showProduct('Beauty Products')">
+          Beauty Products
+        </button>
+        <button class="product-btn" onclick="showProduct('Baby Products')">
+          Baby Products
+        </button>
+        <button class="product-btn" onclick="showProduct('Grocery')">
+          Grocery
+        </button>
+        <button class="product-btn" onclick="showProduct('Mobile Devices')">
+          Mobile Devices
+        </button>
+        <button class="product-btn" onclick="showProduct('Mobile Accesories')">
+          Mobile Accesories
+        </button>
+        <button class="product-btn" onclick="showProduct('Watches')">
+          Watches
+        </button>
+        <button class="product-btn" onclick="showProduct('Furniture')">
+          Furniture
+        </button>
+      </div>
+      <div class="right-panel" id="product-display">
+        <h2>Select a Product</h2>
+        <p>Please select a product to see details.</p>
+        <div class="card-container" id="card-container"></div>
+      </div>
+    </div>
+    <div class="container" id="cart" style="display: none">
+      <h2>Products In Cart</h2>
+      <div id="cart-items"></div>
+      <button class="product-btn3" onclick="clearCart()">Clear Cart</button>
+    </div>
+
+    <script>
+      const products = {
+        "Fashion & Clothes": "Details about Fashion & Clothes...",
+        "Beauty Products": "Details about Beauty Products...",
+        "Baby Products": "Details about Baby Products...",
+        Grocery: "Details about Grocery...",
+        "Mobile Devices": "Details about Mobile Devices...",
+        "Mobile Accesories": "Details about Mobile Accesories...",
+        Watches: "Details about Watches...",
+        Furniture: "Details about Furniture...",
+      };
+
+      let cart = [];
+
+      function showProduct(product) {
+        const cardContainer = document.getElementById("card-container");
+        cardContainer.innerHTML = ""; // Clear previous cards
+
+        for (let i = 1; i <= 8; i++) {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+                    <h3>${product} Card ${i}</h3>
+                    <p>${products[product]}</p>
+                    <button class="product-btn2" onclick="addToCart('${product}')">Add to Cart</button>
+                `;
+          cardContainer.appendChild(card);
+        }
+      }
+
+      function addToCart(product) {
+        cart.push(product);
+        alert(`${product} has been added to your cart!`);
+      }
+
+      function showPage(page) {
+        document.getElementById("Product Gallery").style.display =
+          page === "Product Gallery" ? "flex" : "none";
+        document.getElementById("cart").style.display =
+          page === "cart" ? "block" : "none";
+        if (page === "cart") {
+          displayCart();
+        }
+      }
+
+      function displayCart() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        cartItemsContainer.innerHTML = ""; // Clear previous items
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+          return;
+        }
+
+        const uniqueProducts = [...new Set(cart)];
+        uniqueProducts.forEach((product) => {
+          const count = cart.filter((item) => item === product).length;
+          const item = document.createElement("div");
+          item.className = "cart-item";
+          item.innerHTML = `<p>${product} x ${count}</p>`;
+          cartItemsContainer.appendChild(item);
+        });
+      }
+
+      function clearCart() {
+        cart = [];
+        displayCart();
+      }
+    </script>
+  </body>
+</html>
